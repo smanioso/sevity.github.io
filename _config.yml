@@ -18,10 +18,10 @@ sass:
 
 permalink: /posts/:title/
 texture:
-  title: Adam Denisov
-  tagline: Developer. Designer
+  title: 기술블로그
+  tagline: Platform Dev.
   date_format: "%b %-d, %Y"
-  style: black
+  style: blue
   showNav: false
   showPicker: true
 

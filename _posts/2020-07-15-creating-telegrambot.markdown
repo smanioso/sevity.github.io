@@ -22,3 +22,11 @@ categories: Python Telegrambot
 ## 텔레그램 봇 만들기
 
 텔레그램봇은 모든 텔레그램봇의 아버지 봇 @BotFather 를 이용해서 만들 수 있습니다.
+
+![posting-creating-telegrambot-1.PNG](../assets/images/posting-creating-telegrambot-1.PNG)
+
+BotFather 와 채팅창에서 봇생성, 봇이름 변경, command 추가 등의 작업을 할 수 있는데요, 일단 봇을 만들어보겠습니다.
+
+![posting-creating-telegrambot-2.PNG](../assets/images/posting-creating-telegrambot-2.PNG)
+
+여기에 "봇 !D!"로 적은 부분이

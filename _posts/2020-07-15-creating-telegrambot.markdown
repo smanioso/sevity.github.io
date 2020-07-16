@@ -6,9 +6,8 @@ date:   2020-07-09 14:47:36 +0530
 categories: Python Telegrambot
 ---
 
-이런저런 배치와 데몬을 만들다보면 어느순간 잘 돌았는지 체크하는 것 자체가 부담이 되는 순간이 옵니다.
-알람을 맞춰놓고 로그를 들여다 보자니 로그 파일 여는 것도 번거로와지고
-창 하나에 로그 파일을 tail -f 해놓자니 화면이 부족해지고..
+이런저런 배치와 데몬을 만들다보면 모니터링 자체가 부담이 되는 순간이 옵니다.
+알람을 맞춰놓고 로그를 들여다 보자니 로그 파일 여는 것도 번거롭고 창 하나에 로그 파일을 tail -f 해놓자니 화면이 부족해지고..
 뭔가 뭔가 뭔가 내가 봐야 하는거만 딱 봤으면 좋겠는데 하는 생각이 들게 되죠.
 
 이럴때는 텔레그램이 좋은 대안이 됩니다. 가령 뭔가 돌리고 있는데 에러가 나서 프로그램이 죽는다던지 했을때 바로 텔레그램이 오면 실시간으로 대응도 가능하죠.
@@ -18,13 +17,17 @@ categories: Python Telegrambot
 ## 텔레그램 봇 만들기
 
 텔레그램봇은 모든 텔레그램봇의 아버지 봇 @BotFather 를 이용해서 만들 수 있습니다.
+
 ![posting-creating-telegrambot-1.PNG](../../assets/images/posting-creating-telegrambot-1.PNG)
 
 BotFather 와 채팅창에서 봇생성, 봇이름 변경, command 추가 등의 작업을 할 수 있는데요, 일단 봇을 만들어보겠습니다.
+
 ![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-2.PNG)
+
 위의 박스로 가려놓은 부분에 bot_token이 생성이 되고 텔레그램 REST API를 사용할때 이 bot_token을 사용하게 됩니다.
 
 @mc_ex_bot 을 검색을 해보면 봇이 생성된것을 확인할 수 있습니다.
+
 ![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-3.PNG)
 
 
@@ -33,6 +36,7 @@ BotFather 와 채팅창에서 봇생성, 봇이름 변경, command 추가 등의
 저희의 궁극적인 목표는 텔레그램으로 메세지를 보내려면 봇이 참여하고 있는 방이 필요하겠죠?
 그리고 어떤 채팅방인지도 알아내야 합니다. 텔레그램에서는 chat_id 라고 합니다.
 한번 봇과 단둘이 오붓하게 대화할 수 있는 개인방을 열어서 시작해봅시다.
+
 ![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-4.PNG)
 
 이렇게 봇이 참가한 방에 오고가는 메세지는 [getUpdates](https://core.telegram.org/bots/api#getupdates)라는 REST API로 가져올수 있습니다.
@@ -63,22 +67,22 @@ https://api.telegram.org/bot예제지만그래도봇토큰은가려야지/getUpd
 ```
 
 메세지를 3개를 보내서 3개가 떴는데, 가독성이 떨어지니까 하나만 뽑아왔습니다.
-눈을 부릅뜨고 보면 "chat"이라는 key와 dict를 발견할 수 있습니다.
-이 dict 바로 우리가 알고싶어하는 채팅방의 정보가 담겨 있습니다!
-dict 안에 "id" 필드가 채팅방의 ID가 되겠습니다. (짧게 앞으론 chat_id라고 할게요)
+
+눈을 부릅뜨고 보면 "chat"이라는 key와 dict를 발견할 수 있는데요, dict 안에 "id" 필드가 채팅방의 ID가 되겠습니다. (짧게 앞으론 chat_id라고 할게요)
 예제에서 사용한 방의 ID는 53395910 이군요
 
 
 ## 텔레그램으로 메세지 보내기
 
 자 이제 메세지를 한번 보내봅시다.
-[sendMessage API](https://core.telegram.org/bots/api#sendmessage)를 이용하면 되는데요. 일단 브라우저에서 바로 한번 콜을 해보겠습니다.
+[sendMessage API](https://core.telegram.org/bots/api#sendmessage)를 이용하면 되는데요. 브라우저로 바로 콜을 해보겠습니다.
 
 ![posting-creating-telegrambot-5.PNG](../../assets/images/posting-creating-telegrambot-5.PNG)
 
 chat_id에는 53395910을 넣고 text에는 보낼 메세지를 넣어 보냈고, 메세지가 잘 날아왔군요.
 
-잘 동작하는걸 확인했으니 코드로 한번 짜보겠습니다.POST로 json 형태로 데이터를 보내는 예제입니다.
+잘 동작하는걸 확인했으니 코드로 한번 짜보겠습니다. POST로 json 형태로 데이터를 보내는 예제입니다.
+
 ```python
 import json
 

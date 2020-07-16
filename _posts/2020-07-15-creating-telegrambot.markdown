@@ -267,3 +267,7 @@ def divide2(divider):
 if __name__ == '__main__':
     divide2(0)
 ```
+
+send_exc 라는 decorator를 만들고 divide2에 적용했습니다.
+
+send_exc 라는 decorator 관련 코드가 추가되고 기존 코드 수정없이 @send_exc 한줄 추가해서 텔레그램을 전송하는 기능이 구현이 됩니다.

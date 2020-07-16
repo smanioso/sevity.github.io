@@ -203,6 +203,67 @@ divide 함수에 try-except를 추가하고 traceback.format_exc()로 Traceback�
 
 문제는 git과 같은 형상관리 툴에서 기존 코드를 저렇게 묶어버리면 기존 코드 전체가 제가 작성한걸로 간주가 됩니다.
 
-~~이러면 git blame으로 억울한 비난을 받을 수 있습니다~~
+그리고 괜히 쓸데없이 코드가 길어지기도 하고요
 
-코드 수정 내역은 예쁘고 잘 정리하면 좋으니까 이런경우에는 decorator를 자주 씁니다.
+코드 수정은 예쁘고 잘 정리하면 좋으니까 이런경우에는 아래와 같이 decorator를 자주 씁니다.
+
+```python
+import json
+import traceback
+
+# pip installed packages
+import requests
+
+_BOT_TOKEN = '여기에는봇토큰이들어갑니다.'
+
+_BASE_URL = 'https://api.telegram.org/bot{}'.format(_BOT_TOKEN)
+
+
+HEADERS = {
+    'Content-Type': 'application/json'
+}
+
+
+def send_message(chat_id, text):
+    url = '/'.join([_BASE_URL, 'sendMessage'])
+    data = {
+        'chat_id': chat_id,
+        'text': text,
+    }
+
+    res = requests.post(url, data=json.dumps(data), headers=HEADERS)
+    print(res)
+    res_json = json.loads(res.text)
+    print(res_json)
+
+
+def send_exc(original_func):
+    def deco(*args, **kwargs):
+        try:
+            return original_func(*args, **kwargs)
+        except Exception:
+            send_message(53395910, 'divide function has error\n{}'.format(
+                traceback.format_exc()
+            ))
+            raise
+    return deco
+
+
+def divide(divider):
+    try:
+        return 1000 / divider
+    except Exception:
+        send_message(53395910, 'divide function has error\n{}'.format(
+            traceback.format_exc()
+        ))
+        raise
+
+
+@send_exc
+def divide2(divider):
+    return 1000 / divider
+
+
+if __name__ == '__main__':
+    divide2(0)
+```

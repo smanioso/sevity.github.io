@@ -25,17 +25,17 @@ categories: Python Telegrambot
 
 텔레그램봇은 모든 텔레그램봇의 아버지 봇 @BotFather 를 이용해서 만들 수 있습니다.
 
-![posting-creating-telegrambot-1.PNG](../assets/images/posting-creating-telegrambot-1.PNG)
+![posting-creating-telegrambot-1.PNG](../../assets/images/posting-creating-telegrambot-1.PNG)
 
 BotFather 와 채팅창에서 봇생성, 봇이름 변경, command 추가 등의 작업을 할 수 있는데요, 일단 봇을 만들어보겠습니다.
 
-![posting-creating-telegrambot-2.PNG](../assets/images/posting-creating-telegrambot-2.PNG)
+![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-2.PNG)
 
 위의 박스로 가려놓은 부분에 bot_token이 생성이 되고 텔레그램 REST API를 사용할때 이 bot_token을 사용하게 됩니다.
 
 그리고 @mc_ex_bot 을 검색을 해보면 봇이 생성된것을 확인할 수 있습니다.
 
-![posting-creating-telegrambot-2.PNG](../assets/images/posting-creating-telegrambot-3.PNG)
+![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-3.PNG)
 
 
 ## 텔레그램 봇이 메세지를 보낼 방 알아내기
@@ -46,7 +46,7 @@ BotFather 와 채팅창에서 봇생성, 봇이름 변경, command 추가 등의
 
 한번 봇과 단둘이 오붓하게 대화할 수 있는 개인방을 열어서 시작해봅시다.
 
-![posting-creating-telegrambot-2.PNG](../assets/images/posting-creating-telegrambot-4.PNG)
+![posting-creating-telegrambot-2.PNG](../../assets/images/posting-creating-telegrambot-4.PNG)
 
 이렇게 봇이 참가한 방에 오고가는 메세지는 [getUpdates](https://core.telegram.org/bots/api#getupdates)라는 REST API로 가져올수 있습니다.
 
@@ -96,7 +96,7 @@ dict 안에 "id" 필드가 채팅방의 ID가 되겠습니다. (짧게 앞으론
 
 [sendMessage API](https://core.telegram.org/bots/api#sendmessage)를 이용하면 되는데요. 일단 브라우저에서 바로 한번 콜을 해보겠습니다.
 
-![posting-creating-telegrambot-5.PNG](../assets/images/posting-creating-telegrambot-5.PNG)
+![posting-creating-telegrambot-5.PNG](../../assets/images/posting-creating-telegrambot-5.PNG)
 
 chat_id에는 53395910을 넣고 text에는 보낼 메세지를 넣어 보냈고, 메세지가 잘 날아왔군요.
 
